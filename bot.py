@@ -1,6 +1,6 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
-
+import os
 TOKEN = '7530759323:AAF7oNowTgos9csp5kgyysQ2FwexkWEIOHs'
 
 # دالة التعامل مع /start
@@ -27,4 +27,6 @@ if __name__ == '__main__':
     app.add_handler(CallbackQueryHandler(handle_button))
 
     print("[*] Bot is running...")
-    app.run_polling()
+    PORT = int(os.environ.get("PORT", 8443))
+app.run_webhook(listen="0.0.0.0", port=PORT, url_path=TOKEN,
+                webhook_url=f"https://YOUR-RAILWAY-APP-NAME.up.railway.app/{TOKEN}")
